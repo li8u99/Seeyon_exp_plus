@@ -3,6 +3,8 @@
 import os
 from pyfiglet import Figlet
 from optparse import OptionParser
+import configparser
+import git
 from poc import webmail, session_upload, getSessionList, information, sql, htmlofficeservlet, ajax
 
 if __name__ == '__main__':
@@ -18,6 +20,7 @@ if __name__ == '__main__':
     parser.add_option('-u', '--url', dest='url', help="target url")
     parser.add_option('-f', '--file', dest='file', help="url file")
     parser.add_option('--att', dest='attack', default=False, action='store_true', help="getshell")
+    parser.add_option('--update', dest='update', default=False, action='store_true', help="update")
     (options, args) = parser.parse_args()
     if options.file:
         f = open(options.file, 'r')
@@ -42,3 +45,9 @@ if __name__ == '__main__':
         htmlofficeservlet.check(options.url, options.attack)
         ajax.check(options.url, options.attack)
         print('\033[34m[#]扫描已完成，结果保存至result.txt\033[0m')
+
+    if options.update:
+        config = configparser.ConfigParser()
+        config.read("update.conf")
+        print(config['github']['email'])
+        clone = git.Repo.clone_from("https://github.com/li8u99/Seeyon_exp_plus.git", "to_path")
