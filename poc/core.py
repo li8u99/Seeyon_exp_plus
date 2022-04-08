@@ -28,12 +28,13 @@ def end_echo(name, payload=None):
 
 def post(url, path, header, data, files=None):
     url = url + path
+    print(url)
     try:
         if files:
-            r = requests.post(url=url, data=data, headers=header, files=files, timeout=3, verify=False)
+            r = requests.post(url=url, data=data, headers=header, files=files, timeout=3, verify=False, proxies={"http": "127.0.0.1:8080"})
             return r
         else:
-            r = requests.post(url=url, data=data, headers=header, timeout=3, verify=False)
+            r = requests.post(url=url, data=data, headers=header, timeout=3, verify=False, proxies={"http": "127.0.0.1:8080"})
             return r
     except Exception as e:
         pass

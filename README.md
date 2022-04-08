@@ -32,7 +32,7 @@ SQL注入：
 ```
 **首次使用请安装依赖：**
 ```
-python3 install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 **使用方法：**
 ```

