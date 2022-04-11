@@ -28,7 +28,6 @@ def end_echo(name, payload=None):
 
 def post(url, path, header, data, files=None):
     url = url + path
-    print(url)
     try:
         if files:
             r = requests.post(url=url, data=data, headers=header, files=files, timeout=3, verify=False)
